@@ -1,0 +1,42 @@
+<% if user_signed_in? %>
+
+<h1>Cats List</h1>
+
+<div id="friends">
+  <table class="table table-hover table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Twitter</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @friends.each do |friend| %>
+        <%if friend.user == current_user%>
+        <tr>
+            <td><%= link_to friend.first_name + " " + friend.last_name, friend %></td>
+            <td><%= friend.email %></td>
+            <td><%= friend.phone %></td>
+            <td><%= friend.twitter %></td>
+            <td><%= link_to t('Delete'), friend, data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class: "btn btn-outline-danger btn-sm" %>
+            </td>
+        </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+
+</table>
+</div>
+
+<%= link_to "New friend", new_friend_path, class: "btn btn-secondary" %>
+<% else %>
+
+<br><h1>Welcome to Catstagram...</h1><br>
+<p>
+  "🐾 Introducing Catstagram: The Ultimate Playground for Purrfection! 🐱✨ Step into a world where whiskers and wittiness collide, where feline fashion and napping prowess reign supreme. 🎀🛏️ From high-flying leaps that defy gravity to the art of the alluring 'tail flick,' Catstagram is the VIP (Very Important Paws) club where charismatic kitties flaunt their untamed charm. 📸✨ Swipe through a tapestry of fluffy divas, daring explorers, and the masterminds behind the Great Kibble Heists! 😼🕵️‍♂️ Join us in decoding the secret language of tail fluffiness and whisker whispers. It's not just an app; it's a whisker wonderland where purrs get the likes they deserve and every kitty gets their 15 minutes of fame. Meow and forever! 🌟🐾 #CatstagramMagic"
+</p>
+
+<% end %>
